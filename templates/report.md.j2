@@ -1,0 +1,26 @@
+# Road Runner Report
+
+## Run Summary
+
+- Run ID: {{ summary.run_id }}
+- Flow File: {{ summary.flow.path }}
+- Margin Profile: {{ summary.margin.path or "n/a" }}
+- Unit Under Test: {{ summary.unit or "n/a" }}
+- Created: {{ summary.created_at }}
+- Global Seed: {{ summary.seed }}
+
+## Margin Points
+
+{% for sub in subruns -%}
+### {{ sub.run_id }} ({{ sub.margin.point_id }})
+
+- Status: {{ sub.status }}
+- Duration (s): {{ "%.2f"|format(sub.duration_s) }}
+
+| Step | Adapter | Status | Duration (s) |
+|------|---------|--------|--------------|
+{% for step in sub.steps -%}
+| {{ step.name }} | {{ step.adapter }} | {{ step.status }} | {{ "%.2f"|format(step.duration_s) }} |
+{% endfor %}
+
+{% endfor %}

@@ -1,0 +1,15 @@
+metadata:
+  name: default_policy
+  version: 1
+avt_bounds:
+  vcore_mv:
+    min: 900
+    max: 1000
+  soc_freq_mhz:
+    min: 1500
+    max: 2200
+  load_percent:
+    min: 0
+    max: 100
+behavior:
+  on_violation: abort

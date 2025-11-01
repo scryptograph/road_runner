@@ -1,0 +1,17 @@
+metadata:
+  name: sample_smoke_flow
+  description: Basic smoke flow for demonstration.
+  version: 1
+steps:
+  - name: cpu_smoke
+    adapter: mprime
+    parameters:
+      duration_s: 1.0
+      seed: 123
+    sweeps:
+      worker_count: [1, 2, 4]
+  - name: memory_check
+    adapter: mem_diag
+    parameters:
+      duration_s: 0.5
+      pattern: sequential

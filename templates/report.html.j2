@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Road Runner Report - {{ summary.run_id }}</title>
+    <style>
+      body { font-family: "Segoe UI", Arial, sans-serif; margin: 2rem; color: #1f2933; }
+      h1, h2, h3 { color: #111827; }
+      table { border-collapse: collapse; width: 100%; margin-bottom: 1.5rem; }
+      th, td { border: 1px solid #d1d5db; padding: 0.5rem; text-align: left; }
+      th { background-color: #f3f4f6; }
+      section { margin-bottom: 2rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Road Runner Report</h1>
+    <section>
+      <h2>Run Summary</h2>
+      <ul>
+        <li><strong>Run ID:</strong> {{ summary.run_id }}</li>
+        <li><strong>Flow File:</strong> {{ summary.flow.path }}</li>
+        <li><strong>Margin Profile:</strong> {{ summary.margin.path or "n/a" }}</li>
+        <li><strong>Unit Under Test:</strong> {{ summary.unit or "n/a" }}</li>
+        <li><strong>Created:</strong> {{ summary.created_at }}</li>
+        <li><strong>Global Seed:</strong> {{ summary.seed }}</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Margin Points</h2>
+      {% for sub in subruns %}
+      <article>
+        <h3>{{ sub.run_id }} ({{ sub.margin.point_id }})</h3>
+        <ul>
+          <li><strong>Status:</strong> {{ sub.status }}</li>
+          <li><strong>Duration (s):</strong> {{ "%.2f"|format(sub.duration_s) }}</li>
+        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Adapter</th>
+              <th>Status</th>
+              <th>Duration (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for step in sub.steps %}
+            <tr>
+              <td>{{ step.name }}</td>
+              <td>{{ step.adapter }}</td>
+              <td>{{ step.status }}</td>
+              <td>{{ "%.2f"|format(step.duration_s) }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </article>
+      {% endfor %}
+    </section>
+  </body>
+</html>

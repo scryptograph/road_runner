@@ -1,0 +1,16 @@
+name: mprime
+path: ./diags/mprime_stub.py
+parameters:
+  duration_s:
+    type: float
+    min: 0
+    max: 86400
+  worker_count:
+    type: integer
+    min: 1
+    max: 1024
+  seed:
+    type: integer
+    min: 0
+    max: 2_147_483_647
+description: Stubbed mprime diagnostic shipped with the repository.

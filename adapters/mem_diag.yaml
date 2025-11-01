@@ -1,0 +1,15 @@
+name: mem_diag
+path: ./diags/mem_test_stub.py
+parameters:
+  duration_s:
+    type: float
+    min: 0.1
+    max: 7200
+  pattern:
+    type: string
+    allowed: ["sequential", "random"]
+  seed:
+    type: integer
+    min: 0
+    max: 2_147_483_647
+description: Stubbed memory diagnostic shipped with the repository.

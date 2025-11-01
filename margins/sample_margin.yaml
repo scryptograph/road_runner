@@ -1,0 +1,13 @@
+metadata:
+  name: default_margin
+  description: Sample AVT sweep profile.
+  version: 1
+global_seed: 1337
+targets:
+  default:
+    vcore_mv:
+      sweep: [940, 960, 980]
+    soc_freq_mhz: 1800
+    jitter:
+      enable: false
+      magnitude_pct: 5
